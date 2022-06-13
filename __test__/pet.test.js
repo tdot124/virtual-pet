@@ -28,7 +28,7 @@ describe('growUp', () => {
         pet.growUp();
         expect(pet.age).toEqual(1);
     })
-    it('adds two to age' , () => {
+    it('adds two to age when called twice' , () => {
         const pet = new Pet('Fido');
         pet.growUp();
         pet.growUp();
@@ -43,6 +43,28 @@ describe('growUp', () => {
         const pet = new Pet('Fido');
         pet.growUp();
         expect(pet.fitness).toEqual(7);
-    })
+    });
 
-})
+});
+
+describe('walk', () => {
+    it('increases the pets fitness level by 4 up to a maximum of 10', () => {
+        const pet = new Pet('Fido');
+        pet.walk();
+        expect(pet.fitness).toEqual(10);
+        pet.growUp();
+        pet.growUp();
+        expect(pet.fitness).toEqual(4);
+        pet.walk();
+        expect(pet.fitness).toEqual(8);
+        pet.walk();
+        expect(pet.fitness).toEqual(10);
+    });
+
+    it('increases the pets fitness level by 4 up to a maximum of 10', () => {
+        const pet = new Pet('Fido');
+        pet.fitness = 9;
+        pet.walk();
+        expect(pet.fitness).toEqual(10);
+    });
+});
