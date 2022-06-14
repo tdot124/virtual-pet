@@ -112,8 +112,30 @@ describe('checkUp' , () => {
         pet.hunger = 2;
         expect(pet.checkUp()).toEqual('I feel great!')
     });
+});
 
+describe('isAlive', () => {
+    it('returns true after pet is created', () => {
+        const pet = new Pet('Fido');
+        expect(pet.isAlive).toEqual(true);
+    });
 
+    it('returns false when fitness is zero', () => {
+        const pet = new Pet('Fido');
+        pet.fitness = 0;
+        expect(pet.isAlive).toEqual(false);
+        });
 
-
+    it('returns false when hunger is 10 or above', () => {
+        const pet = new Pet('Fido');
+        pet.hunger = 11;
+        expect(pet.isAlive).toEqual(false);
+        });
+    
+    it('returns false when age reaches 30', () => {
+        const pet = new Pet('Fido');
+        pet.age = 30;
+        expect(pet.isAlive).toEqual(false);
+        });
+    
 })
