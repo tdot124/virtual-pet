@@ -50,16 +50,10 @@ describe('growUp', () => {
 describe('walk', () => {
     it('increases the pets fitness level by 4 up to a maximum of 10', () => {
         const pet = new Pet('Fido');
+        pet.fitness = 1;
         pet.walk();
-        expect(pet.fitness).toEqual(10);
-        pet.growUp();
-        pet.growUp();
-        expect(pet.fitness).toEqual(4);
-        pet.walk();
-        expect(pet.fitness).toEqual(8);
-        pet.walk();
-        expect(pet.fitness).toEqual(10);
-    });
+        expect(pet.fitness).toEqual(5);
+        });
 
     it('increases the pets fitness level by 4 up to a maximum of 10', () => {
         const pet = new Pet('Fido');
@@ -72,13 +66,18 @@ describe('walk', () => {
 describe('feed', () => {
     it('decreases pet hunger counter to a a minimum of zero', () => {
         const pet = new Pet('Fido');
-        pet.hunger = 10;
+        pet.hunger = 9;
         pet.feed();
-        expect(pet.hunger).toEqual(7);
+        expect(pet.hunger).toEqual(6);
         pet.feed();
-        expect(pet.hunger).toEqual(4);
+        expect(pet.hunger).toEqual(3);
         pet.feed();
-        expect(pet.hunger).toEqual(1);
+        expect(pet.hunger).toEqual(0);
+    });
+
+    it('decreases pet hunger counter to a a minimum of zero', () => {
+        const pet = new Pet('Fido');
+        pet.hunger = 1;        
         pet.feed();
         expect(pet.hunger).toEqual(0);
     });
@@ -139,3 +138,29 @@ describe('isAlive', () => {
         });
     
 })
+
+describe('isAlive guard clauses', () => {
+    it('Throws an error Your pet is no longer alive :( when using checkUp if isAlive is false', () => {
+        const pet = new Pet('Fido');
+        pet.age = 30;
+        expect(() => pet.checkUp()).toThrow('Your pet is no longer alive :(');
+    });
+
+    it('Throws an error Your pet is no longer alive :( when trying to use walk function if isAlive is false', () => {
+        const pet = new Pet('Fido');
+        pet.age = 30;
+        expect(() => pet.walk()).toThrow('Your pet is no longer alive :(');
+        });
+
+    it('Throws an error Your pet is no longer alive :( when trying to use growUp function if isAlive is false', () => {
+        const pet = new Pet('Fido');
+        pet.age = 30;
+        expect(() => pet.growUp()).toThrow('Your pet is no longer alive :(');
+        });
+    
+    it('Throws an error Your pet is no longer alive :( when trying to use feed function if isAlive is false', () => {
+        const pet = new Pet('Fido');
+        pet.age = 30;
+        expect(() => pet.feed()).toThrow('Your pet is no longer alive :(');
+        });
+    })
